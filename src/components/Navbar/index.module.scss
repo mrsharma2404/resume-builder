@@ -1,0 +1,37 @@
+@import '@styles/variables';
+
+.wrapper {
+  display: flex;
+  width: 100vw;
+  height: 72px;
+  justify-content: space-between;
+  border-bottom: 1px solid #d9d9d9;
+}
+.leftContainer,
+.rightContainer {
+  display: flex;
+  height: 72px;
+  width: auto;
+  align-items: center;
+  padding-left: 40px;
+  gap: 0px 8px;
+}
+.headingIcon {
+  width: 32px;
+  height: 32px;
+}
+.heading {
+  color: $primary-color;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+}
+.rightContainer {
+  padding: 0px 40px 0px 0px;
+  gap: 0px 24px;
+}
+.exportBtn {
+  border: none;
+  color: #fff;
+  background: #d33852;
+}
