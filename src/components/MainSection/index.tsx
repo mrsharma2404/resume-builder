@@ -4,6 +4,7 @@ import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 
 // styles import
 import styles from './index.module.scss'
+import BasicButton from '@components/Buttons/BasicButton'
 
 // TODO: need to think of a suitable name for this section
 const MainSection = () => {
@@ -11,7 +12,7 @@ const MainSection = () => {
 
   return (
     <div className={styles.wrapper}>
-      <Tabs selectedTabClassName={styles.selectedTab}>
+      <Tabs selectedTabClassName={styles.selectedTab} className={styles.tabs}>
         <TabList className={styles.tablist}>
           {resumeSectionNameList.map((resumeSectionName, index) => {
             return (
@@ -23,7 +24,12 @@ const MainSection = () => {
         </TabList>
         <div className={styles.divider}></div>
 
-        <TabPanel></TabPanel>
+        <TabPanel className={styles.tabPanelWrapper}>
+          <div className={styles.tabPanelContainer}>
+            <BasicButton label="Add new" onClickFunction={() => {}} className={styles.addBtn} />
+            <div></div>
+          </div>
+        </TabPanel>
         <TabPanel></TabPanel>
         <TabPanel></TabPanel>
       </Tabs>

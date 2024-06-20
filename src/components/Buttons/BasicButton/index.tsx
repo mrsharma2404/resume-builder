@@ -7,11 +7,14 @@ const BasicButton = ({
   onClickFunction
 }: {
   label: string
-  className: string
+  className?: string
   onClickFunction: () => void
 }) => {
   return (
-    <div className={`${styles.commonStyle} ${className}`} onClick={() => onClickFunction()}>
+    <div
+      className={`${styles.commonStyle} ${className ? className : ''}`}
+      onClick={() => onClickFunction()}
+    >
       {label}
     </div>
   )

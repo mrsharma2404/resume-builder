@@ -3,6 +3,7 @@
   flex-direction: column;
   width: 100vw;
   align-items: center;
+  justify-content: center;
 }
 .tablist {
   display: flex;
@@ -32,4 +33,27 @@
   width: 100vw;
   height: 1px;
   background: #eee;
+}
+.tabPanelWrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 120px 0px 110px;
+  width: auto;
+}
+.tabPanelContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 47px 0px;
+  width: 800px;
+  margin-left: 18.5%;
+  // size of left-container & gap in profile section,
+  // i need to allign both input that's why i added this margin istead of auto
+  // although we can improve this by discussing
+  // resposiveness of design with profile section and main section
+}
+.addBtn {
+  border-radius: 8px;
+  border: 1px solid #717171;
+  height: 48px;
+  justify-content: center;
 }
