@@ -10,6 +10,7 @@ import CustomInput from '@components/Inputs/CustomInput'
 
 // styles import
 import styles from './index.module.scss'
+import FormButton from '@components/Buttons/FormButton'
 
 const ProfileSection = () => {
   const onSubmit = (values: any) => {
@@ -61,7 +62,7 @@ const ProfileSection = () => {
                 </div>
                 <div className={styles.rightSection}>
                   <Field
-                    name="name"
+                    name="short_bio"
                     render={({ input }) => (
                       <CustomTextBox
                         label="Short Bio"
@@ -72,8 +73,9 @@ const ProfileSection = () => {
                   />
                 </div>
               </div>
-
-              <button type="submit">Submit</button>
+              <div className={styles.bottomContainer}>
+                <FormButton type="submit">Save</FormButton>
+              </div>
             </form>
           )
         }}
