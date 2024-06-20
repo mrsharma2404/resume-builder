@@ -1,0 +1,35 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  align-items: center;
+}
+.tablist {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  list-style-type: none; /* Remove bullets */
+  padding: 0;
+  margin: 0;
+}
+.tabItem {
+  display: flex;
+  align-items: center;
+  padding: 8px 22px;
+  border-bottom: 2px solid #fff;
+  cursor: pointer;
+
+  color: #222;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+.selectedTab {
+  border-bottom: 2px solid #222;
+}
+.divider {
+  display: flex;
+  width: 100vw;
+  height: 1px;
+  background: #eee;
+}

@@ -3,7 +3,7 @@ import commonReducer from './commonSlice'
 
 export const store = configureStore({
     reducer: {
-        counter: commonReducer,
+        commonReducer,
     },
 })
 

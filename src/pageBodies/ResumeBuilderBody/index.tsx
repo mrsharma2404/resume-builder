@@ -6,6 +6,7 @@ import Navbar from '@components/Navbar'
 // styles import
 import styles from './index.module.scss'
 import ProfileSection from '@components/ProfileSection'
+import MainSection from '@components/MainSection'
 
 const ResumeBuilderBody = () => {
   return (
@@ -15,6 +16,9 @@ const ResumeBuilderBody = () => {
       <div>
         <div className={styles.profileSection}>
           <ProfileSection />
+        </div>
+        <div>
+          <MainSection />
         </div>
       </div>
     </div>
