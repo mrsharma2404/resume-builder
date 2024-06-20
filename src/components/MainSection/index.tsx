@@ -2,9 +2,12 @@ import React from 'react'
 import { useAppSelector } from '@helpers/hooks/redux'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 
+// local component imports
+import BasicButton from '@components/Buttons/BasicButton'
+
 // styles import
 import styles from './index.module.scss'
-import BasicButton from '@components/Buttons/BasicButton'
+import ResumeSectionItem from '@components/ResumeSectionItem'
 
 // TODO: need to think of a suitable name for this section
 const MainSection = () => {
@@ -27,7 +30,11 @@ const MainSection = () => {
         <TabPanel className={styles.tabPanelWrapper}>
           <div className={styles.tabPanelContainer}>
             <BasicButton label="Add new" onClickFunction={() => {}} className={styles.addBtn} />
-            <div></div>
+            <div className={styles.sectionItemList}>
+              {[0, 1, 2, 3].map((item, index) => {
+                return <ResumeSectionItem />
+              })}
+            </div>
           </div>
         </TabPanel>
         <TabPanel></TabPanel>

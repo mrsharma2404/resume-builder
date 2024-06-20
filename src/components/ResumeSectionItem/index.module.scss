@@ -1,0 +1,103 @@
+.wrapper {
+  display: flex;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #ebebeb;
+  margin-top: 25px;
+}
+
+.header {
+  display: flex;
+  width: 800px;
+  justify-content: space-between;
+  padding: 0px 15px;
+  cursor: pointer;
+  height: 56px;
+  align-items: center;
+}
+
+.headerLeft {
+  display: flex;
+  height: 56px;
+  align-items: center;
+}
+.heading {
+  display: flex;
+  align-items: center;
+  color: #2b2b2b;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+}
+.headerRight {
+  display: flex;
+  align-items: center;
+  height: 56px;
+
+  color: #717171;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.arrowIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+.headerOpen {
+  .arrowIcon {
+    transform: rotate(90deg) !important;
+  }
+}
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 24px 24px 32px;
+  gap: 25px;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label1,
+.label3 {
+  display: flex;
+  align-items: center;
+  color: #222;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+}
+.label2 {
+  display: flex;
+  align-items: center;
+  color: #2b2b2b;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+.label3 {
+  font-weight: 500;
+}
+.btnBox {
+  display: flex;
+  gap: 25px;
+}
+
+.btn {
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid #ebebeb;
+
+  color: #717171;
+  font-size: 16px;
+  font-weight: 600;
+}
