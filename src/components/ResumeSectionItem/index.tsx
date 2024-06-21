@@ -9,7 +9,7 @@ import WorkExperienceForm from '@components/WorkExperienceForm'
 import AchievementForm from '@components/AchievementForm'
 
 // helpers and services import
-import { IResumeSection } from '@redux/commonSlice'
+import { IResumeSection, setWorkData } from '@redux/commonSlice'
 import { ResumeSections } from '@helpers/constants/common'
 
 // icons imports
@@ -17,15 +17,18 @@ import ArrowIcon from 'icons/ArrowIcon'
 
 // styles import
 import styles from './index.module.scss'
+import { useAppDispatch, useAppSelector } from '@helpers/hooks/redux'
 
 const ResumeSectionItem = ({
   resumeSectionName,
   data,
-  index
+  index,
+  handleDelete
 }: {
   resumeSectionName: IResumeSection
   data: any
   index: number
+  handleDelete: (index: number) => void
 }) => {
   const [showModal, setShowModal] = useState(false)
 
@@ -104,7 +107,11 @@ const ResumeSectionItem = ({
               label="Edit"
               onClickFunction={() => setShowModal(true)}
             />
-            <BasicButton className={styles.btn} label="Delete" onClickFunction={() => {}} />
+            <BasicButton
+              className={styles.btn}
+              label="Delete"
+              onClickFunction={() => handleDelete(index)}
+            />
           </div>
         </div>
       </Collapsible>

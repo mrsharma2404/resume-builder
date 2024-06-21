@@ -9,14 +9,20 @@ import AchievementForm from '@components/AchievementForm'
 import WorkExperienceForm from '@components/WorkExperienceForm'
 
 // helpers
-import { useAppSelector } from '@helpers/hooks/redux'
-import { IResumeSection } from '@redux/commonSlice'
+import { useAppDispatch, useAppSelector } from '@helpers/hooks/redux'
+import {
+  IResumeSection,
+  setAchievementData,
+  setEducationData,
+  setWorkData
+} from '@redux/commonSlice'
 import { ResumeSections } from '@helpers/constants/common'
 
 // styles import
 import styles from './index.module.scss'
 
 const ListSection = ({ resumeSectionName }: { resumeSectionName: IResumeSection }) => {
+  const dispatch = useAppDispatch()
   const [showModal, setShowModal] = useState(false)
 
   const educationDataRedux = useAppSelector((state) => state.commonReducer.educationData)
@@ -28,6 +34,7 @@ const ListSection = ({ resumeSectionName }: { resumeSectionName: IResumeSection 
       case ResumeSections.EDUCATION:
         return {
           data: educationDataRedux,
+          setData: setEducationData,
           form: (
             <EducationForm
               onSaveCallback={() => setShowModal(false)}
@@ -39,6 +46,7 @@ const ListSection = ({ resumeSectionName }: { resumeSectionName: IResumeSection 
       case ResumeSections.WORK_EXPERIENCES:
         return {
           data: workDataRedux,
+          setData: setWorkData,
           form: (
             <WorkExperienceForm
               onSaveCallback={() => setShowModal(false)}
@@ -50,6 +58,7 @@ const ListSection = ({ resumeSectionName }: { resumeSectionName: IResumeSection 
       case ResumeSections.ACHIEVEMENTS:
         return {
           data: achievementDataRedux,
+          setData: setAchievementData,
           form: (
             <AchievementForm
               onSaveCallback={() => setShowModal(false)}
@@ -63,6 +72,15 @@ const ListSection = ({ resumeSectionName }: { resumeSectionName: IResumeSection 
     }
   }
 
+  const handleDelete = (index: number) => {
+    let section = getSection()
+    let workData = [...section.data]
+    workData.splice(index, 1)
+    if (section.setData && typeof section.setData == 'function') {
+      dispatch(section.setData(workData))
+    }
+  }
+
   return (
     <>
       <BasicButton
@@ -73,7 +91,12 @@ const ListSection = ({ resumeSectionName }: { resumeSectionName: IResumeSection 
       <div className={styles.sectionItemList}>
         {getSection().data.map((item, index) => {
           return (
-            <ResumeSectionItem index={index} resumeSectionName={resumeSectionName} data={item} />
+            <ResumeSectionItem
+              handleDelete={handleDelete}
+              index={index}
+              resumeSectionName={resumeSectionName}
+              data={item}
+            />
           )
         })}
       </div>
