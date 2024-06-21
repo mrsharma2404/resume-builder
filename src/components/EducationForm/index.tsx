@@ -17,18 +17,28 @@ import styles from './index.module.scss'
 const EducationForm = ({
   data,
   isEdit = false,
+  editIndex,
+  onSaveCallback,
   onCancelCallback
 }: {
   data: any
   isEdit?: boolean
+  editIndex?: number | undefined
+  onSaveCallback: () => void
   onCancelCallback: () => void
 }) => {
   const dispatch = useAppDispatch()
   const educationDataRedux = useAppSelector((state) => state.commonReducer.educationData)
 
   const onSubmit = (values: any) => {
-    console.log({ values })
-    dispatch(setEducationData([...educationDataRedux, values]))
+    if (isEdit && editIndex != undefined) {
+      let tempData = [...educationDataRedux]
+      tempData[editIndex] = values
+      dispatch(setEducationData(tempData))
+    } else {
+      dispatch(setEducationData([...educationDataRedux, values]))
+    }
+    onSaveCallback()
   }
 
   const validate = (values: any) => {
@@ -37,11 +47,12 @@ const EducationForm = ({
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.heading}>Add new education</div>
+      <div className={styles.heading}>{isEdit ? 'Edit' : 'Add'} new education</div>
 
       <Form
         onSubmit={onSubmit}
         validate={validate}
+        initialValues={data}
         render={({ handleSubmit }) => {
           return (
             <form onSubmit={handleSubmit}>

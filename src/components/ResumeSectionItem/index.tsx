@@ -20,23 +20,47 @@ import styles from './index.module.scss'
 
 const ResumeSectionItem = ({
   resumeSectionName,
-  data
+  data,
+  index
 }: {
   resumeSectionName: IResumeSection
   data: any
+  index: number
 }) => {
   const [showModal, setShowModal] = useState(false)
 
   const getSection = () => {
     switch (resumeSectionName.value) {
       case ResumeSections.EDUCATION:
-        return <EducationForm isEdit data={data} onCancelCallback={() => setShowModal(false)} />
+        return (
+          <EducationForm
+            data={data}
+            isEdit
+            editIndex={index}
+            onSaveCallback={() => setShowModal(false)}
+            onCancelCallback={() => setShowModal(false)}
+          />
+        )
       case ResumeSections.WORK_EXPERIENCES:
         return (
-          <WorkExperienceForm isEdit data={data} onCancelCallback={() => setShowModal(false)} />
+          <WorkExperienceForm
+            data={data}
+            isEdit
+            editIndex={index}
+            onSaveCallback={() => setShowModal(false)}
+            onCancelCallback={() => setShowModal(false)}
+          />
         )
       case ResumeSections.ACHIEVEMENTS:
-        return <AchievementForm isEdit data={data} onCancelCallback={() => setShowModal(false)} />
+        return (
+          <AchievementForm
+            data={data}
+            isEdit
+            editIndex={index}
+            onSaveCallback={() => setShowModal(false)}
+            onCancelCallback={() => setShowModal(false)}
+          />
+        )
       default:
         return <div></div>
     }

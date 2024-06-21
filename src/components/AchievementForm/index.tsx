@@ -17,10 +17,14 @@ import styles from './index.module.scss'
 const AchievementForm = ({
   data,
   isEdit = false,
+  editIndex,
+  onSaveCallback,
   onCancelCallback
 }: {
   data: any
   isEdit?: boolean
+  editIndex?: number | undefined
+  onSaveCallback: () => void
   onCancelCallback: () => void
 }) => {
   const dispatch = useAppDispatch()
@@ -28,7 +32,14 @@ const AchievementForm = ({
   const achievementDataRedux = useAppSelector((state) => state.commonReducer.achievementData)
 
   const onSubmit = (values: any) => {
-    dispatch(setAchievementData([...achievementDataRedux, values]))
+    if (isEdit && editIndex != undefined) {
+      let tempData = [...achievementDataRedux]
+      tempData[editIndex] = values
+      dispatch(setAchievementData(tempData))
+    } else {
+      dispatch(setAchievementData([...achievementDataRedux, values]))
+    }
+    onSaveCallback()
   }
   const validate = (values: any) => {
     return {}
@@ -36,11 +47,12 @@ const AchievementForm = ({
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.heading}>Add new achievement </div>
+      <div className={styles.heading}>{isEdit ? 'Edit' : 'Add'} new achievement </div>
 
       <Form
         onSubmit={onSubmit}
         validate={validate}
+        initialValues={data}
         render={({ handleSubmit }) => {
           return (
             <form onSubmit={handleSubmit}>

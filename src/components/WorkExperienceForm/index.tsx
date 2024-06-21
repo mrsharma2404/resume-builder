@@ -17,10 +17,14 @@ import styles from './index.module.scss'
 const WorkExperienceForm = ({
   data,
   isEdit = false,
+  editIndex,
+  onSaveCallback,
   onCancelCallback
 }: {
   data: any
   isEdit?: boolean
+  editIndex?: number | undefined
+  onSaveCallback: () => void
   onCancelCallback: () => void
 }) => {
   const dispatch = useAppDispatch()
@@ -28,8 +32,14 @@ const WorkExperienceForm = ({
   const workDataRedux = useAppSelector((state) => state.commonReducer.workData)
 
   const onSubmit = (values: any) => {
-    console.log({ values })
-    dispatch(setWorkData([...workDataRedux, values]))
+    if (isEdit && editIndex != undefined) {
+      let workData = [...workDataRedux]
+      workData[editIndex] = values
+      dispatch(setWorkData(workData))
+    } else {
+      dispatch(setWorkData([...workDataRedux, values]))
+    }
+    onSaveCallback()
   }
 
   const validate = (values: any) => {
@@ -38,11 +48,12 @@ const WorkExperienceForm = ({
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.heading}>Add new work experience</div>
+      <div className={styles.heading}>{isEdit ? 'Edit' : 'Add'} new work experience</div>
 
       <Form
         onSubmit={onSubmit}
         validate={validate}
+        initialValues={data}
         render={({ handleSubmit }) => {
           return (
             <form onSubmit={handleSubmit}>

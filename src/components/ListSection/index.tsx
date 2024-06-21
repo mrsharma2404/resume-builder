@@ -28,17 +28,35 @@ const ListSection = ({ resumeSectionName }: { resumeSectionName: IResumeSection 
       case ResumeSections.EDUCATION:
         return {
           data: educationDataRedux,
-          form: <EducationForm data={0} onCancelCallback={() => setShowModal(false)} />
+          form: (
+            <EducationForm
+              onSaveCallback={() => setShowModal(false)}
+              data={0}
+              onCancelCallback={() => setShowModal(false)}
+            />
+          )
         }
       case ResumeSections.WORK_EXPERIENCES:
         return {
           data: workDataRedux,
-          form: <WorkExperienceForm data={0} onCancelCallback={() => setShowModal(false)} />
+          form: (
+            <WorkExperienceForm
+              onSaveCallback={() => setShowModal(false)}
+              data={0}
+              onCancelCallback={() => setShowModal(false)}
+            />
+          )
         }
       case ResumeSections.ACHIEVEMENTS:
         return {
           data: achievementDataRedux,
-          form: <AchievementForm data={0} onCancelCallback={() => setShowModal(false)} />
+          form: (
+            <AchievementForm
+              onSaveCallback={() => setShowModal(false)}
+              data={0}
+              onCancelCallback={() => setShowModal(false)}
+            />
+          )
         }
       default:
         return { data: [], form: <div></div> }
@@ -54,7 +72,9 @@ const ListSection = ({ resumeSectionName }: { resumeSectionName: IResumeSection 
       />
       <div className={styles.sectionItemList}>
         {getSection().data.map((item, index) => {
-          return <ResumeSectionItem resumeSectionName={resumeSectionName} data={item} />
+          return (
+            <ResumeSectionItem index={index} resumeSectionName={resumeSectionName} data={item} />
+          )
         })}
       </div>
 
