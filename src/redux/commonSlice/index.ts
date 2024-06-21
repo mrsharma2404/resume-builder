@@ -32,6 +32,12 @@ export const commonSlice = createSlice({
   name: 'common',
   initialState,
   reducers: {
+
+    importResume: (state, action: { payload: any }) => {
+      state = action.payload
+      return state
+    },
+
     setProfileSectionData: (state, action: { payload: any }) => {
       state.profileSectionData = action.payload
       return state
@@ -58,6 +64,6 @@ export const commonSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setEducationData, setWorkData, setAchievementData, setProfileSectionData } = commonSlice.actions
+export const { setEducationData, setWorkData, setAchievementData, setProfileSectionData, importResume } = commonSlice.actions
 
 export default commonSlice.reducer
