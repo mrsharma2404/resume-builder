@@ -27,9 +27,9 @@ const MainSection = () => {
         <div className={styles.divider}></div>
         {resumeSectionNameList.map((resumeSectionName, index) => {
           return (
-            <TabPanel className={styles.tabPanelWrapper}>
+            <TabPanel className={styles.tabPanelWrapper} key={resumeSectionName.value}>
               <div className={styles.tabPanelContainer}>
-                <ListSection key={resumeSectionName.value} resumeSectionName={resumeSectionName} />
+                <ListSection resumeSectionName={resumeSectionName} />
               </div>
             </TabPanel>
           )

@@ -94,6 +94,7 @@ const ListSection = ({ resumeSectionName }: { resumeSectionName: IResumeSection 
             <ResumeSectionItem
               handleDelete={handleDelete}
               index={index}
+              key={index}
               resumeSectionName={resumeSectionName}
               data={item}
             />
