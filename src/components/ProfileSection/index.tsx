@@ -22,7 +22,6 @@ const ProfileSection = () => {
 
   const profileSectionDataRedux = useAppSelector((state) => state.commonReducer.profileSectionData)
   const onSubmit = (values: any) => {
-    console.log({ values })
     dispatch(setProfileSectionData(values))
     setIsEdit(false)
   }
