@@ -1,14 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Collapsible from 'react-collapsible'
+
+import Modal from '@components/PopupModal'
+import EducationForm from '@components/EducationForm'
+import BasicButton from '@components/Buttons/BasicButton'
 
 // icons imports
 import ArrowIcon from 'icons/ArrowIcon'
 
 // styles import
 import styles from './index.module.scss'
-import BasicButton from '@components/Buttons/BasicButton'
 
-const ResumeSectionItem = () => {
+const ResumeSectionItem = ({ data }: { data: any }) => {
+  const [showModal, setShowModal] = useState(false)
+
   return (
     <div className={styles.wrapper}>
       <Collapsible
@@ -43,11 +48,19 @@ const ResumeSectionItem = () => {
             </div>
           </div>
           <div className={styles.btnBox}>
-            <BasicButton className={styles.btn} label="Edit" onClickFunction={() => {}} />
+            <BasicButton
+              className={styles.btn}
+              label="Edit"
+              onClickFunction={() => setShowModal(true)}
+            />
             <BasicButton className={styles.btn} label="Delete" onClickFunction={() => {}} />
           </div>
         </div>
       </Collapsible>
+
+      <Modal show={showModal} hideCloseBtn onClose={() => setShowModal(false)}>
+        <EducationForm data={data} onCancelCallback={() => setShowModal(false)} />
+      </Modal>
     </div>
   )
 }
