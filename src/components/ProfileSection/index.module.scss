@@ -6,7 +6,7 @@
 }
 .imageUploadSection {
   display: flex;
-  width: 13.5%; // 174px in 1512px screen size wrt Figma
+  width: 13.5%;
 }
 .formSection {
   display: flex;
@@ -36,31 +36,41 @@
 .bottomContainer {
   margin-top: 25px;
 }
-// // we can improve the css implementation based on how resposive we need it
-// // as of now just completed the basic UI
-// .mainContainer {
-//   display: flex;
-//   width: 100%;
-//   height: auto;
-//   gap: 0px 5%; // 65px in 1512px screen size wrt Figma
-// }
-// .leftSection {
-//   display: flex;
-//   width: 13.5%; // 174px in 1512px screen size wrt Figma
-// }
-// .middleSection {
-//   display: flex;
-//   flex-direction: column;
-//   width: 34.25%; // 440px in 1512px screen size wrt Figma
-//   gap: 25px;
-// }
-// .rightSection {
-//   display: flex;
-//   width: 42.25%; // 540px in 1512px screen size wrt Figma
-// }
-// .bottomContainer {
-//   display: flex;
-//   width: 100%;
-//   padding-left: 18.5%;
-//   margin-top: 25px;
-// }
+
+.text1 {
+  display: flex;
+  align-items: center;
+  color: #222;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}
+.text2 {
+  display: flex;
+  align-items: center;
+  color: #717171;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+.text3 {
+  display: flex;
+  color: #222;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  min-height: 80px;
+}
+.profileSection {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.editBtn {
+  width: 60px;
+  height: 40px;
+  border-radius: 6px;
+  border: 1px solid #ebebeb;
+  color: #717171;
+}

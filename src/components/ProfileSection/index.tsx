@@ -13,6 +13,7 @@ import { setProfileSectionData } from '@redux/commonSlice'
 // styles import
 import styles from './index.module.scss'
 import ImageUpload from '@components/ImageUploader'
+import BasicButton from '@components/Buttons/BasicButton'
 
 const ProfileSection = () => {
   const dispatch = useAppDispatch()
@@ -23,6 +24,7 @@ const ProfileSection = () => {
   const onSubmit = (values: any) => {
     console.log({ values })
     dispatch(setProfileSectionData(values))
+    setIsEdit(false)
   }
 
   const validate = (values: any) => {
@@ -40,6 +42,7 @@ const ProfileSection = () => {
           <Form
             onSubmit={onSubmit}
             validate={validate}
+            initialValues={profileSectionDataRedux}
             render={({ handleSubmit }) => {
               return (
                 <form onSubmit={handleSubmit} className={styles.form}>
@@ -89,7 +92,16 @@ const ProfileSection = () => {
           />
         </div>
       ) : (
-        <div className={styles.profileSection}></div>
+        <div className={styles.profileSection}>
+          <div className={styles.text1}>{profileSectionDataRedux.name}</div>
+          <div className={styles.text2}>{profileSectionDataRedux.email}</div>
+          <div className={styles.text3}>{profileSectionDataRedux.short_bio}</div>
+          <BasicButton
+            label="Edit"
+            className={styles.editBtn}
+            onClickFunction={() => setIsEdit(true)}
+          />
+        </div>
       )}
     </div>
   )
