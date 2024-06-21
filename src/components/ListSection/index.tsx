@@ -20,6 +20,8 @@ import { ResumeSections } from '@helpers/constants/common'
 
 // styles import
 import styles from './index.module.scss'
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 
 const ListSection = ({ resumeSectionName }: { resumeSectionName: IResumeSection }) => {
   const dispatch = useAppDispatch()
@@ -91,13 +93,15 @@ const ListSection = ({ resumeSectionName }: { resumeSectionName: IResumeSection 
       <div className={styles.sectionItemList}>
         {getSection().data.map((item, index) => {
           return (
-            <ResumeSectionItem
-              handleDelete={handleDelete}
-              index={index}
-              key={index}
-              resumeSectionName={resumeSectionName}
-              data={item}
-            />
+            <DndProvider backend={HTML5Backend}>
+              <ResumeSectionItem
+                handleDelete={handleDelete}
+                index={index}
+                key={index}
+                resumeSectionName={resumeSectionName}
+                data={item}
+              />
+            </DndProvider>
           )
         })}
       </div>

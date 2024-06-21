@@ -83,8 +83,11 @@ const ResumeSectionItem = ({
               <div className={styles.heading}>{data.title || data.company || data.institute}</div>
             </div>
             <div className={styles.headerRight}>
-              {data.date || data.start_date} {data.start_date && data.end_date && '-'}{' '}
-              {data.end_date}
+              <div className={styles.dateText}>
+                {data.date || data.start_date} {data.start_date && data.end_date && '-'}{' '}
+                {data.end_date}
+              </div>
+              <div className={styles.reorderIcon}>::</div>
             </div>
           </div>
         }
