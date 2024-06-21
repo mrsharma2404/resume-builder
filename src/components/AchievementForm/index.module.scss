@@ -1,3 +1,5 @@
+@import '@styles/variables';
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -26,7 +28,7 @@
   display: flex;
   align-items: center;
 
-  color: #222;
+  color: $text-default-color;
   font-size: 24px;
   font-weight: 700;
   line-height: 32px;
@@ -34,5 +36,5 @@
 }
 .cancelBtn {
   border: 1px solid #ebebeb;
-  color: #717171;
+  color: $text-subtle-color;
 }

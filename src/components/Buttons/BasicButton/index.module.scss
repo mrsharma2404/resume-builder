@@ -1,3 +1,5 @@
+@import '@styles/variables';
+
 .commonStyle {
   display: flex;
   align-items: center;
@@ -8,7 +10,7 @@
   border: 1px solid #222;
   cursor: pointer;
 
-  color: #222;
+  color: $text-default-color;
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
