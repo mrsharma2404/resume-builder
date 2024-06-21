@@ -19,7 +19,7 @@ const EducationForm = ({ data, onCancelCallback }: { data: any; onCancelCallback
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.heading}>Add New Education {data}</div>
+      <div className={styles.heading}>Add new education {data}</div>
 
       <Form
         onSubmit={onSubmit}
