@@ -5,21 +5,29 @@ import { Field, Form } from 'react-final-form'
 // local component imports
 import CustomTextBox from '@components/Inputs/CustomTextBox'
 import CustomInput from '@components/Inputs/CustomInput'
+import FormButton from '@components/Buttons/FormButton'
 
-// icons import
+// services and helpers import
+import { useAppDispatch, useAppSelector } from '@helpers/hooks/redux'
+import { setProfileSectionData } from '@redux/commonSlice'
 
 // styles import
 import styles from './index.module.scss'
-import FormButton from '@components/Buttons/FormButton'
 
 const ProfileSection = () => {
+  const dispatch = useAppDispatch()
+
+  const profileSectionDataRedux = useAppSelector((state) => state.commonReducer.profileSectionData)
   const onSubmit = (values: any) => {
     console.log({ values })
+    dispatch(setProfileSectionData(values))
   }
 
   const validate = (values: any) => {
     return {}
   }
+  console.log({ profileSectionDataRedux })
+
   return (
     <div className={styles.wrapper}>
       <Form

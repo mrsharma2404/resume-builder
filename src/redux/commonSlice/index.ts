@@ -1,3 +1,4 @@
+import { ResumeSections } from '@helpers/constants/common'
 import { createSlice } from '@reduxjs/toolkit'
 
 export interface IResumeSection {
@@ -11,20 +12,30 @@ export interface CommonState {
   educationData: any[]
   workData: any[]
   achievementData: any[]
-
+  profileSectionData: any
 }
+const resumeSectionNameListInitialValue = [
+  { value: ResumeSections.EDUCATION, label: "Education", id: 1, itemCount: 0 },
+  { value: ResumeSections.WORK_EXPERIENCES, label: "Work Experinces", id: 2, itemCount: 0 },
+  { value: ResumeSections.ACHIEVEMENTS, label: "Achievements", id: 3, itemCount: 0 }
+]
 
 const initialState: CommonState = {
   educationData: [],
   workData: [],
   achievementData: [],
-  resumeSectionNameList: [{ value: "education", label: "Education", id: 1, itemCount: 0 }, { value: "work_experiences", label: "Work Experinces", id: 2, itemCount: 0 }, { value: "achievements", label: "Achievements", id: 3, itemCount: 0 }],
+  profileSectionData: {},
+  resumeSectionNameList: resumeSectionNameListInitialValue
 }
 
 export const commonSlice = createSlice({
   name: 'common',
   initialState,
   reducers: {
+    setProfileSectionData: (state, action: { payload: any }) => {
+      state.profileSectionData = action.payload
+      return state
+    },
     setEducationData: (state, action: { payload: any[] }) => {
       state.educationData = action.payload
       let section = state.resumeSectionNameList.find(section => section.value === "education")
@@ -47,6 +58,6 @@ export const commonSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setEducationData, setWorkData, setAchievementData } = commonSlice.actions
+export const { setEducationData, setWorkData, setAchievementData, setProfileSectionData } = commonSlice.actions
 
 export default commonSlice.reducer
