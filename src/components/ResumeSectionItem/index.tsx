@@ -1,9 +1,16 @@
 import React, { useState } from 'react'
 import Collapsible from 'react-collapsible'
 
+// local component imports
 import Modal from '@components/PopupModal'
 import EducationForm from '@components/EducationForm'
 import BasicButton from '@components/Buttons/BasicButton'
+import WorkExperienceForm from '@components/WorkExperienceForm'
+import AchievementForm from '@components/AchievementForm'
+
+// helpers and services import
+import { IResumeSection } from '@redux/commonSlice'
+import { ResumeSections } from '@helpers/constants/common'
 
 // icons imports
 import ArrowIcon from 'icons/ArrowIcon'
@@ -11,8 +18,29 @@ import ArrowIcon from 'icons/ArrowIcon'
 // styles import
 import styles from './index.module.scss'
 
-const ResumeSectionItem = ({ data }: { data: any }) => {
+const ResumeSectionItem = ({
+  resumeSectionName,
+  data
+}: {
+  resumeSectionName: IResumeSection
+  data: any
+}) => {
   const [showModal, setShowModal] = useState(false)
+
+  const getSection = () => {
+    switch (resumeSectionName.value) {
+      case ResumeSections.EDUCATION:
+        return <EducationForm isEdit data={data} onCancelCallback={() => setShowModal(false)} />
+      case ResumeSections.WORK_EXPERIENCES:
+        return (
+          <WorkExperienceForm isEdit data={data} onCancelCallback={() => setShowModal(false)} />
+        )
+      case ResumeSections.ACHIEVEMENTS:
+        return <AchievementForm isEdit data={data} onCancelCallback={() => setShowModal(false)} />
+      default:
+        return <div></div>
+    }
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -25,27 +53,26 @@ const ResumeSectionItem = ({ data }: { data: any }) => {
               <div className={styles.arrowIcon}>
                 <ArrowIcon />
               </div>
-              <div className={styles.heading}>Arkham Institute of Technology, Bangalore</div>
+              <div className={styles.heading}>{data.title || data.company || data.institute}</div>
             </div>
-            <div className={styles.headerRight}>May 2014 - Feb 2017</div>
+            <div className={styles.headerRight}>
+              {data.date || data.start_date} {data.start_date && data.end_date && '-'}{' '}
+              {data.end_date}
+            </div>
           </div>
         }
       >
         <div className={styles.mainContainer}>
-          <div className={styles.box}>
-            <div className={styles.label1}>Degree</div>
-            <div className={styles.label2}>Masters in Technology</div>
-          </div>
+          {data.role || data.degree ? (
+            <div className={styles.box}>
+              <div className={styles.label1}>{data.role ? 'Role' : 'Degree'}</div>
+              <div className={styles.label2}>{data.role || data.degree}</div>
+            </div>
+          ) : null}
+
           <div className={styles.box}>
             <div className={styles.label1}>Description</div>
-            <div className={styles.label3}>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-              has been the industry's standard dummy text ever since the 1500s, when an unknown
-              printer took a galley of type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into electronic typesetting,
-              remaining essentially unchanged. It was popularised in the 1960s with the release of
-              Letraset sheets.
-            </div>
+            <div className={styles.label3}>{data.description}</div>
           </div>
           <div className={styles.btnBox}>
             <BasicButton
@@ -59,7 +86,7 @@ const ResumeSectionItem = ({ data }: { data: any }) => {
       </Collapsible>
 
       <Modal show={showModal} hideCloseBtn onClose={() => setShowModal(false)}>
-        <EducationForm data={data} onCancelCallback={() => setShowModal(false)} />
+        {getSection()}
       </Modal>
     </div>
   )

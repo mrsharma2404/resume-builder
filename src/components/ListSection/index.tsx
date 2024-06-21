@@ -11,6 +11,7 @@ import WorkExperienceForm from '@components/WorkExperienceForm'
 // helpers
 import { useAppSelector } from '@helpers/hooks/redux'
 import { IResumeSection } from '@redux/commonSlice'
+import { ResumeSections } from '@helpers/constants/common'
 
 // styles import
 import styles from './index.module.scss'
@@ -21,20 +22,20 @@ const ListSection = ({ resumeSectionName }: { resumeSectionName: IResumeSection 
   const educationDataRedux = useAppSelector((state) => state.commonReducer.educationData)
   const workDataRedux = useAppSelector((state) => state.commonReducer.workData)
   const achievementDataRedux = useAppSelector((state) => state.commonReducer.achievementData)
-  console.log({ workDataRedux })
+
   const getSection = () => {
     switch (resumeSectionName.value) {
-      case 'education':
+      case ResumeSections.EDUCATION:
         return {
           data: educationDataRedux,
           form: <EducationForm data={0} onCancelCallback={() => setShowModal(false)} />
         }
-      case 'work_experiences':
+      case ResumeSections.WORK_EXPERIENCES:
         return {
           data: workDataRedux,
           form: <WorkExperienceForm data={0} onCancelCallback={() => setShowModal(false)} />
         }
-      case 'achievements':
+      case ResumeSections.ACHIEVEMENTS:
         return {
           data: achievementDataRedux,
           form: <AchievementForm data={0} onCancelCallback={() => setShowModal(false)} />
@@ -53,7 +54,7 @@ const ListSection = ({ resumeSectionName }: { resumeSectionName: IResumeSection 
       />
       <div className={styles.sectionItemList}>
         {getSection().data.map((item, index) => {
-          return <ResumeSectionItem data={item} />
+          return <ResumeSectionItem resumeSectionName={resumeSectionName} data={item} />
         })}
       </div>
 
