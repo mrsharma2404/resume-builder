@@ -1,16 +1,34 @@
+import React from 'react'
+import { Field, Form } from 'react-final-form'
+
+// local component imports
 import BasicButton from '@components/Buttons/BasicButton'
 import FormButton from '@components/Buttons/FormButton'
 import CustomInput from '@components/Inputs/CustomInput'
 import CustomTextBox from '@components/Inputs/CustomTextBox'
-import React from 'react'
-import { Field, Form } from 'react-final-form'
+
+// helpers and services import
+import { useAppDispatch, useAppSelector } from '@helpers/hooks/redux'
+import { setEducationData } from '@redux/commonSlice'
 
 // styles import
 import styles from './index.module.scss'
 
-const EducationForm = ({ data, onCancelCallback }: { data: any; onCancelCallback: () => void }) => {
+const EducationForm = ({
+  data,
+  isEdit = false,
+  onCancelCallback
+}: {
+  data: any
+  isEdit?: boolean
+  onCancelCallback: () => void
+}) => {
+  const dispatch = useAppDispatch()
+  const educationDataRedux = useAppSelector((state) => state.commonReducer.educationData)
+
   const onSubmit = (values: any) => {
     console.log({ values })
+    dispatch(setEducationData([...educationDataRedux, values]))
   }
 
   const validate = (values: any) => {
@@ -19,7 +37,7 @@ const EducationForm = ({ data, onCancelCallback }: { data: any; onCancelCallback
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.heading}>Add new education {data}</div>
+      <div className={styles.heading}>Add new education</div>
 
       <Form
         onSubmit={onSubmit}

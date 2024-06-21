@@ -1,23 +1,35 @@
 import React from 'react'
 import { Field, Form } from 'react-final-form'
 
+// local component imports
 import BasicButton from '@components/Buttons/BasicButton'
 import FormButton from '@components/Buttons/FormButton'
 import CustomInput from '@components/Inputs/CustomInput'
 import CustomTextBox from '@components/Inputs/CustomTextBox'
+
+// helpers and services import
+import { useAppDispatch, useAppSelector } from '@helpers/hooks/redux'
+import { setWorkData } from '@redux/commonSlice'
 
 // styles import
 import styles from './index.module.scss'
 
 const WorkExperienceForm = ({
   data,
+  isEdit = false,
   onCancelCallback
 }: {
   data: any
+  isEdit?: boolean
   onCancelCallback: () => void
 }) => {
+  const dispatch = useAppDispatch()
+
+  const workDataRedux = useAppSelector((state) => state.commonReducer.workData)
+
   const onSubmit = (values: any) => {
     console.log({ values })
+    dispatch(setWorkData([...workDataRedux, values]))
   }
 
   const validate = (values: any) => {
@@ -26,7 +38,7 @@ const WorkExperienceForm = ({
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.heading}>Add new work experience {data}</div>
+      <div className={styles.heading}>Add new work experience</div>
 
       <Form
         onSubmit={onSubmit}

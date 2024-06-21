@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useAppSelector } from '@helpers/hooks/redux'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 
 // local component imports
-import BasicButton from '@components/Buttons/BasicButton'
-import ResumeSectionItem from '@components/ResumeSectionItem'
+import ListSection from '@components/ListSection'
 
 // styles import
 import styles from './index.module.scss'
@@ -26,19 +25,15 @@ const MainSection = () => {
           })}
         </TabList>
         <div className={styles.divider}></div>
-
-        <TabPanel className={styles.tabPanelWrapper}>
-          <div className={styles.tabPanelContainer}>
-            <BasicButton label="Add new" onClickFunction={() => {}} className={styles.addBtn} />
-            <div className={styles.sectionItemList}>
-              {[0, 1, 2, 3].map((item, index) => {
-                return <ResumeSectionItem data={item} />
-              })}
-            </div>
-          </div>
-        </TabPanel>
-        <TabPanel></TabPanel>
-        <TabPanel></TabPanel>
+        {resumeSectionNameList.map((resumeSectionName, index) => {
+          return (
+            <TabPanel className={styles.tabPanelWrapper}>
+              <div className={styles.tabPanelContainer}>
+                <ListSection key={resumeSectionName.value} resumeSectionName={resumeSectionName} />
+              </div>
+            </TabPanel>
+          )
+        })}
       </Tabs>
     </div>
   )
