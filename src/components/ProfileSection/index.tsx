@@ -1,5 +1,4 @@
-import React from 'react'
-import Dropzone from 'react-dropzone'
+import React, { useState } from 'react'
 import { Field, Form } from 'react-final-form'
 
 // local component imports
@@ -13,9 +12,12 @@ import { setProfileSectionData } from '@redux/commonSlice'
 
 // styles import
 import styles from './index.module.scss'
+import ImageUpload from '@components/ImageUploader'
 
 const ProfileSection = () => {
   const dispatch = useAppDispatch()
+
+  const [isEdit, setIsEdit] = useState(true)
 
   const profileSectionDataRedux = useAppSelector((state) => state.commonReducer.profileSectionData)
   const onSubmit = (values: any) => {
@@ -30,64 +32,65 @@ const ProfileSection = () => {
 
   return (
     <div className={styles.wrapper}>
-      <Form
-        onSubmit={onSubmit}
-        validate={validate}
-        render={({ handleSubmit }) => {
-          return (
-            <form onSubmit={handleSubmit}>
-              <div className={styles.mainContainer}>
-                <div className={styles.leftSection}>
-                  <Dropzone onDrop={(acceptedFiles) => console.log(acceptedFiles)}>
-                    {({ getRootProps, getInputProps }) => (
-                      <section>
-                        <div {...getRootProps()}>
-                          <input {...getInputProps()} />
-                          <p>Drag 'n' drop some files here, or click to select files</p>
-                        </div>
-                      </section>
-                    )}
-                  </Dropzone>
-                </div>
-                <div className={styles.middleSection}>
-                  <Field
-                    name="name"
-                    render={({ input }) => (
-                      <CustomInput
-                        type="text"
-                        label="Name"
-                        value={input.value}
-                        onChange={input.onChange}
+      <div className={styles.imageUploadSection}>
+        <ImageUpload />
+      </div>
+      {isEdit ? (
+        <div className={styles.formSection}>
+          <Form
+            onSubmit={onSubmit}
+            validate={validate}
+            render={({ handleSubmit }) => {
+              return (
+                <form onSubmit={handleSubmit} className={styles.form}>
+                  <div className={styles.mainContainer}>
+                    <div className={styles.leftSection}>
+                      <Field
+                        name="name"
+                        render={({ input }) => (
+                          <CustomInput
+                            type="text"
+                            label="Name"
+                            value={input.value}
+                            onChange={input.onChange}
+                          />
+                        )}
                       />
-                    )}
-                  />
-                  <Field
-                    name="email"
-                    render={({ input }) => (
-                      <CustomInput label="Email-ID" value={input.value} onChange={input.onChange} />
-                    )}
-                  />
-                </div>
-                <div className={styles.rightSection}>
-                  <Field
-                    name="short_bio"
-                    render={({ input }) => (
-                      <CustomTextBox
-                        label="Short Bio"
-                        value={input.value}
-                        onChange={input.onChange}
+                      <Field
+                        name="email"
+                        render={({ input }) => (
+                          <CustomInput
+                            label="Email-ID"
+                            value={input.value}
+                            onChange={input.onChange}
+                          />
+                        )}
                       />
-                    )}
-                  />
-                </div>
-              </div>
-              <div className={styles.bottomContainer}>
-                <FormButton type="submit">Save</FormButton>
-              </div>
-            </form>
-          )
-        }}
-      />
+                    </div>
+                    <div className={styles.rightSection}>
+                      <Field
+                        name="short_bio"
+                        render={({ input }) => (
+                          <CustomTextBox
+                            label="Short Bio"
+                            value={input.value}
+                            onChange={input.onChange}
+                          />
+                        )}
+                      />
+                    </div>
+                  </div>
+                  <div className={styles.bottomContainer}>
+                    <FormButton type="submit">Save</FormButton>
+                  </div>
+                </form>
+              )
+            }}
+          />
+        </div>
+      ) : (
+        <div className={styles.profileSection}></div>
+      )}
     </div>
   )
 }
