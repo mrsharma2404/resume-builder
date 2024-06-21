@@ -29,7 +29,6 @@ const ProfileSection = () => {
   const validate = (values: any) => {
     return {}
   }
-  console.log({ profileSectionDataRedux })
 
   return (
     <div className={styles.wrapper}>
